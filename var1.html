@@ -2,46 +2,74 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>Ищерги – Старт</title>
+  <title>Ищерги против перегрева</title>
   <link rel="stylesheet" href="cliker-styles.css">
+  <style>
+    body {background:#0f0e17; color:#eae9ff;}
+    .control-panel {display:flex; gap:10px; justify-content:center; margin-top:16px;}
+    .control-btn {
+      background:linear-gradient(180deg,#2a2750,#241f44);
+      border:1px solid rgba(255,255,255,.1);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .arena-mini {position:relative;
+      background:linear-gradient(180deg,rgba(107,92,255,.15),rgba(255,107,214,.08));
+      border:1px solid rgba(255,255,255,.05);
+      min-height:200px;margin:20px 0; border-radius:16px;overflow:hidden;}
+    .ish{position:absolute;width:22px;height:22px;top:50%;left:50%;}
+    .panel-title{text-align:center;margin:12px 0;font-size:18px;color:#a9a6d8;}
+  </style>
 </head>
 <body>
-<main class="wrap">
-  <header class="top">
-    <h1>Покорми ищергов токенами</h1>
-    <p class="sub">Кликай, чтобы скормить токены. Ищерги растут, квоты тают.</p>
-  </header>
+  <main class="wrap">
+    <header class="top">
+      <h1>Ищерги против перегрева</h1>
+      <p class="sub">Кормите ищергов и удерживайте баланс между VRAM и Контекстом.</p>
+    </header>
 
-  <section class="stats">
-    <div class="stat">
-      <span class="label">Скормлено токенов</span>
-      <span class="value">0</span>
-    </div>
-    <div class="stat">
-      <span class="label">Популяция ищергов</span>
-      <span class="value">3</span>
-    </div>
-  </section>
+    <section class="stats">
+      <div class="stat">
+        <span class="label">Токены</span>
+        <span class="value">1 250</span>
+      </div>
+      <div class="stat">
+        <span class="label">Популяция</span>
+        <span class="value">7 540</span>
+      </div>
+    </section>
 
-  <section class="bars">
-    <div class="bar">
-      <div class="bar-top"><span>VRAM</span><span>100%</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
-    </div>
-    <div class="bar">
-      <div class="bar-top"><span>Контекст</span><span>100%</span></div>
-      <div class="bar-track"><div class="bar-fill bar-ctx" style="width:100%"></div></div>
-    </div>
-  </section>
+    <section class="bars">
+      <div class="bar">
+        <div class="bar-top"><span>VRAM</span><span>67%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:67%"></div></div>
+      </div>
+      <div class="bar">
+        <div class="bar-top"><span>Контекст</span><span>42%</span></div>
+        <div class="bar-track"><div class="bar-fill bar-ctx" style="width:42%"></div></div>
+      </div>
+    </section>
 
-  <section class="arena">
-    <button class="feed">
-      <span class="token">🟣</span>
-      <span class="feed-text">Скормить токен</span>
-      <span class="hint">Пробел тоже работает</span>
-    </button>
-    <div class="swarm"></div>
-  </section>
-</main>
+    <div class="panel-title">Арена ищергов</div>
+    <section class="arena-mini">
+      <div class="ish">👾</div>
+      <div class="ish" style="left:30%;top:40%;">👾</div>
+      <div class="ish" style="left:70%;top:60%;">👾</div>
+    </section>
+
+    <div class="panel-title">Панель управления</div>
+    <section class="control-panel">
+      <button class="control-btn">⚡️ Кормить</button>
+      <button class="control-btn">❄️ Охладить VRAM</button>
+      <button class="control-btn">🌀 Сжать контекст</button>
+    </section>
+
+    <footer class="foot">
+      <small>Удержи оба индикатора > 0%, иначе ищерги взбунтуются!</small>
+    </footer>
+  </main>
 </body>
 </html>
