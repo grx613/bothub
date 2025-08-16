@@ -41,13 +41,11 @@
         // столкновение с башней
         for(let b of tower){
           if(Math.abs(this.x - b.x) < this.size && Math.abs(this.y+this.size/2 - b.y) < this.size/2){
-            // приземлился
             this.falling = false;
             this.y = b.y - this.size;
             tower.push(this);
             currentBlock = null;
-            score++;
-            scoreEl.textContent = score;
+            afterPlaced();
             return;
           }
         }
@@ -57,26 +55,30 @@
           this.y = H - this.size/2;
           tower.push(this);
           currentBlock = null;
-          score++;
-          scoreEl.textContent = score;
+          afterPlaced();
           return;
         }
       }
     }
   }
 
+  function afterPlaced(){
+    score++;
+    scoreEl.textContent = score;
+    // создаём сразу новый бегущий блок
+    currentBlock = new Block(W/2, 30, 40);
+  }
+
   function dropBlock(){
     if(gameOver) return;
     if(currentBlock && !currentBlock.falling){
       currentBlock.falling = true;
-    } else if(!currentBlock){
-      currentBlock = new Block(W/2, 30, 40);
     }
   }
 
   function reset(){
     tower = [];
-    currentBlock = null;
+    currentBlock = new Block(W/2, 30, 40); // сразу первый
     score = 0;
     gameOver = false;
     scoreEl.textContent = score;
@@ -85,7 +87,6 @@
 
   function checkCollapse(){
     if(tower.length < 2) return;
-    // если блок вышел за пределы экрана
     for(let b of tower){
       if(b.x < 0 || b.x > W){
         gameOver = true;
@@ -95,7 +96,6 @@
 
   function loop(){
     ctx.clearRect(0,0,W,H);
-    // Draw tower
     for(let b of tower) b.draw();
     if(currentBlock){
       currentBlock.update();
@@ -118,5 +118,6 @@
     if(e.code === 'Space'){ e.preventDefault(); dropBlock(); }
   });
 
+  reset(); // запуск игры
   loop();
 })();
