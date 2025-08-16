@@ -94,8 +94,8 @@
     if (state.ended) return;
     state.tokens += 1;
     state.pop += 1 + Math.floor(state.pop * 0.01);
-    state.vram = clamp(state.vram - 0.6, 0, 100);
-    state.ctx  = clamp(state.ctx  - 1.2, 0, 100);
+    state.vram = clamp(state.vram - rand(0.6, 1.0), 0, 100);
+    state.ctx  = clamp(state.ctx  - rand(1.0, 1.4), 0, 100);
     render();
     addIshergBurst(x, y, 5);
     if (state.vram <= 0 || state.ctx <= 0){
