@@ -5,36 +5,54 @@
   <title>Ищерги-клон Factory</title>
   <link rel="stylesheet" href="cliker-styles.css">
   <style>
-    .factory-panel{display:flex;gap:12px;justify-content:center;margin-top:16px;}
-    .machine{background:#1a1830;padding:12px 16px;border-radius:12px;text-align:center;flex:1;position:relative;overflow:hidden}
-    .machine span{display:block;margin-top:6px;color:#a9a6d8}
+    .arena{position:relative;background:#241f44;border-radius:16px;
+      min-height:260px;margin:20px 0;overflow:hidden;padding:10px;}
+    .clone{position:absolute;transition:transform 1.5s ease-out, opacity 1.5s;
+      font-size:24px;}
+    .actions{margin-top:16px;display:flex;justify-content:center;gap:12px;}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);
+      display:flex;align-items:center;justify-content:center;color:#fff;
+      font-size:20px;}
+    .hidden{display:none;}
   </style>
 </head>
 <body>
 <main class="wrap">
   <header class="top">
     <h1>Ищерги‑клон Factory</h1>
-    <p class="sub">Корми токенами → они штампуют новых клонов.</p>
+    <p class="sub">Корми токенами → популяция растёт, но ресурсы тают.</p>
   </header>
 
   <section class="stats">
-    <div class="stat"><span class="label">Токены</span><span class="value">3 240</span></div>
-    <div class="stat"><span class="label">Популяция</span><span class="value">12 580</span></div>
+    <div class="stat"><span class="label">Токены</span><span class="value" id="tokens">0</span></div>
+    <div class="stat"><span class="label">Популяция</span><span class="value" id="pop">3</span></div>
   </section>
 
   <section class="bars">
-    <div class="bar"><div class="bar-top"><span>VRAM</span><span>74%</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:74%"></div></div></div>
-    <div class="bar"><div class="bar-top"><span>Контекст</span><span>51%</span></div>
-      <div class="bar-track"><div class="bar-fill bar-ctx" style="width:51%"></div></div></div>
+    <div class="bar">
+      <div class="bar-top"><span>VRAM</span><span id="vramPct">100%</span></div>
+      <div class="bar-track"><div id="vramBar" class="bar-fill" style="width:100%"></div></div>
+    </div>
+    <div class="bar">
+      <div class="bar-top"><span>Контекст</span><span id="ctxPct">100%</span></div>
+      <div class="bar-track"><div id="ctxBar" class="bar-fill bar-ctx" style="width:100%"></div></div>
+    </div>
   </section>
 
-  <div class="factory-panel">
-    <div class="machine">🟣<span>Токен‑поток</span></div>
-    <div class="machine">👾👾👾<span>Конвейер клонов</span></div>
-    <div class="machine">⚠️<span>Перегруз VRAM</span></div>
-  </div>
+  <section class="arena" id="arena"></section>
+
+  <section class="actions">
+    <button class="ghost" id="feedBtn">⚡️ Кормить</button>
+    <button class="ghost" id="resetBtn">🔄 Сбросить</button>
+  </section>
 </main>
+
+<div class="overlay hidden" id="gameOver">
+  <div>
+    <p id="gameOverText"></p>
+    <button id="restart" class="ghost">Попробовать снова</button>
+  </div>
+</div>
 
 <script src="factory.js"></script>
 </body>
