@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Ищерги – Старт</title>
+  <link rel="stylesheet" href="cliker-styles.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <h1>Покорми ищергов токенами</h1>
+    <p class="sub">Кликай, чтобы скормить токены. Ищерги растут, квоты тают.</p>
+  </header>
+
+  <section class="stats">
+    <div class="stat">
+      <span class="label">Скормлено токенов</span>
+      <span class="value">0</span>
+    </div>
+    <div class="stat">
+      <span class="label">Популяция ищергов</span>
+      <span class="value">3</span>
+    </div>
+  </section>
+
+  <section class="bars">
+    <div class="bar">
+      <div class="bar-top"><span>VRAM</span><span>100%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+    </div>
+    <div class="bar">
+      <div class="bar-top"><span>Контекст</span><span>100%</span></div>
+      <div class="bar-track"><div class="bar-fill bar-ctx" style="width:100%"></div></div>
+    </div>
+  </section>
+
+  <section class="arena">
+    <button class="feed">
+      <span class="token">🟣</span>
+      <span class="feed-text">Скормить токен</span>
+      <span class="hint">Пробел тоже работает</span>
+    </button>
+    <div class="swarm"></div>
+  </section>
+</main>
+</body>
+</html>
