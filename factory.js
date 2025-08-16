@@ -1,4 +1,3 @@
-// factory.js
 (() => {
   const conveyor = document.querySelector('.machine:nth-child(2)');
   if (!conveyor) return;
@@ -8,11 +7,10 @@
     el.textContent = "👾";
     el.style.position = "absolute";
     el.style.left = `${Math.random()*80+10}%`;
-    el.style.top = `${Math.random()*60+20}%`;
+    el.style.top = "100%";
     el.style.fontSize = "24px";
     el.style.opacity = "0";
     el.style.transition = "top 1.2s ease-out, opacity 1.2s";
-    conveyor.style.position = "relative";
     conveyor.appendChild(el);
 
     requestAnimationFrame(()=>{
