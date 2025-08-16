@@ -20,7 +20,6 @@
   let gameOver = false;
   let ishergi = [];
 
-  // ======= Класс блока =======
   class Block {
     constructor(x,y,size,color){
       this.x = x;
@@ -41,9 +40,8 @@
         if(this.x < this.size/2 || this.x > W - this.size/2){
           this.dx *= -1;
         }
-      }else{
+      } else {
         this.y += this.speed;
-        // сталкивание с башней
         for(let b of tower){
           if(Math.abs(this.x - b.x) < this.size &&
              this.y + this.size/2 >= b.y - this.size/2){
@@ -55,7 +53,6 @@
             return;
           }
         }
-        // дно
         if(this.y + this.size/2 >= H){
           this.falling = false;
           this.y = H - this.size/2;
@@ -67,7 +64,6 @@
     }
   }
 
-  // ======= Класс ищерга =======
   class Isherg {
     constructor() {
       this.x = Math.random() * W;
@@ -88,14 +84,13 @@
       this.x += (Math.random()-0.5)*1.5;
       this.x = Math.max(8, Math.min(W-8,this.x));
       this.timer++;
-      if(this.timer > 180){ // примерно раз в 3 секунды
+      if(this.timer > 180){
         this.timer = 0;
         gnawBlock(this.x);
       }
     }
   }
 
-  // ======= Функции =======
   function afterPlaced(){
     score++;
     scoreEl.textContent = score;
@@ -123,25 +118,30 @@
     // первый блок
     currentBlock = new Block(W/2, 30, blockSize, randColor());
 
-    // спавн ищергов
+    // ищерги
     ishergi = [];
     spawnIshergs(4);
   }
 
   function checkCollapse(){
+    if (tower.length === 0) {
+      gameOver = true;
+      return;
+    }
+    // если башня когда-то была >1 и остался только фундамент, можно закончить
+    if (tower.length === 1 && score > 0) {
+      gameOver = true;
+      return;
+    }
+    // если какой-то блок улетел совсем за экран
     for(let b of tower){
-      if(b.x < 0 || b.x > W){
+      if(b.x < -blockSize || b.x > W + blockSize){
         gameOver = true;
       }
-    }
-    if(tower.length <= 1 && !gameOver){ 
-      // остался один фундамент — значит, башню съели
-      gameOver = true;
     }
   }
 
   function gnawBlock(xPos){
-    // ищем нижние блоки кроме фундамента
     let candidates = tower.filter(b => b.color !== "#444" && b.y > H - blockSize*2);
     if(candidates.length){
       let victim = candidates.reduce((prev,cur)=>
@@ -150,7 +150,7 @@
       let idx = tower.indexOf(victim);
       if(idx>=0){
         tower.splice(idx,1);
-        // всё, что выше жертвы, опускаем вниз
+        // опускаем всё выше
         for(let b of tower){
           if(b.y < victim.y){
             b.y += blockSize;
@@ -171,7 +171,6 @@
       currentBlock.update();
       currentBlock.draw();
     }
-    // ищерги
     ishergi.forEach(i => { i.update(); i.draw(); });
 
     if(!gameOver){
@@ -187,7 +186,6 @@
     return colors[Math.floor(Math.random()*colors.length)];
   }
 
-  // ======= Управление =======
   dropBtn.addEventListener('click', dropBlock);
   resetBtn.addEventListener('click', reset);
   closeOv.addEventListener('click', reset);
@@ -195,7 +193,6 @@
     if(e.code === 'Space'){ e.preventDefault(); dropBlock(); }
   });
 
-  // ======= Старт =======
   reset();
   loop();
 })();
