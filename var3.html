@@ -1,21 +1,45 @@
-<section class="stats">
-  <div class="stat">
-    <span class="label">Скормлено токенов</span>
-    <span class="value">5 421</span>
-  </div>
-  <div class="stat">
-    <span class="label">Популяция ищергов</span>
-    <span class="value">42 200</span>
-  </div>
-</section>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Арена токсинового хаоса</title>
+  <link rel="stylesheet" href="cliker-styles.css">
+  <style>
+    .arena-toxic{position:relative;background:#241f44;border-radius:16px;min-height:250px;padding:12px;overflow:hidden;margin:16px 0;}
+    .toxic-meter{margin:10px 0;}
+    .meter-bar{height:14px;background:#2b2950;border-radius:10px;overflow:hidden}
+    .meter-fill{height:100%;width:78%;background:linear-gradient(90deg,#ff5f5f,#ff3b3b)}
+    .ish-toxic{position:absolute;font-size:28px}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <h1>Арена токсинового хаоса</h1>
+    <p class="sub">Перекормленные ищерги мутируют от токсинов.</p>
+  </header>
 
-<section class="bars">
-  <div class="bar">
-    <div class="bar-top"><span>VRAM</span><span>8%</span></div>
-    <div class="bar-track"><div class="bar-fill" style="width:8%"></div></div>
+  <section class="stats">
+    <div class="stat">
+      <span class="label">Токены скормлены</span>
+      <span class="value">8 921</span>
+    </div>
+    <div class="stat">
+      <span class="label">Мутации</span>
+      <span class="value">14</span>
+    </div>
+  </section>
+
+  <div class="arena-toxic">
+    <div class="ish-toxic" style="left:30%;top:40%;">👾💀</div>
+    <div class="ish-toxic" style="left:55%;top:60%;">👾☢️</div>
+    <div class="ish-toxic" style="left:70%;top:20%;">👾🤢</div>
   </div>
-  <div class="bar">
-    <div class="bar-top"><span>Контекст</span><span>4%</span></div>
-    <div class="bar-track"><div class="bar-fill bar-ctx" style="width:4%"></div></div>
+
+  <div class="toxic-meter">
+    Токсичность:  
+    <div class="meter-bar"><div class="meter-fill"></div></div>
   </div>
-</section>
+</main>
+</body>
+</html>
